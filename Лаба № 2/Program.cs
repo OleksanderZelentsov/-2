@@ -8,7 +8,7 @@ namespace Лаба___2
 {
     public class Graph
     {
-        private int vertices; 
+        private int vertices;
         private List<int>[] adjList;
 
         public Graph(int v)
@@ -73,9 +73,23 @@ namespace Лаба___2
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = System.Text.Encoding.UTF8;
-            Graph directedGraph = new Graph(9);
+
+            Graph undirectedGraph = new Graph(9);
+            undirectedGraph.AddEdgeUndirected(0, 1);
+            undirectedGraph.AddEdgeUndirected(0, 3);
+            undirectedGraph.AddEdgeUndirected(1, 3);
+            undirectedGraph.AddEdgeUndirected(1, 4);
+            undirectedGraph.AddEdgeUndirected(1, 5);
+            undirectedGraph.AddEdgeUndirected(2, 2);
+            undirectedGraph.AddEdgeUndirected(2, 3);
+            undirectedGraph.AddEdgeUndirected(2, 4);
+            undirectedGraph.AddEdgeUndirected(2, 5);
+
+            Graph directedGraph = new Graph(12);
             directedGraph.AddEdgeDirected(0, 1);
             directedGraph.AddEdgeDirected(0, 3);
+            directedGraph.AddEdgeDirected(0, 4);
+            directedGraph.AddEdgeDirected(1, 2);
             directedGraph.AddEdgeDirected(1, 3);
             directedGraph.AddEdgeDirected(1, 4);
             directedGraph.AddEdgeDirected(1, 5);
@@ -83,27 +97,22 @@ namespace Лаба___2
             directedGraph.AddEdgeDirected(2, 3);
             directedGraph.AddEdgeDirected(2, 4);
             directedGraph.AddEdgeDirected(2, 5);
-            Console.WriteLine("DFS для орієнтованого графа:");
-            directedGraph.DFS(2);
-            Console.WriteLine("BFS для орієнтованого графа:");
-            directedGraph.BFS(2);
-            Graph undirectedGraph = new Graph(12);
-            undirectedGraph.AddEdgeUndirected(0, 1);
-            undirectedGraph.AddEdgeUndirected(0, 3);
-            undirectedGraph.AddEdgeUndirected(0, 4);
-            undirectedGraph.AddEdgeUndirected(1, 2);
-            undirectedGraph.AddEdgeUndirected(1, 3);
-            undirectedGraph.AddEdgeUndirected(1, 4);
-            undirectedGraph.AddEdgeUndirected(1, 5);
-            undirectedGraph.AddEdgeUndirected(2, 5);
-            undirectedGraph.AddEdgeUndirected(2, 4);
-            undirectedGraph.AddEdgeUndirected(3, 4);
-            undirectedGraph.AddEdgeUndirected(3, 2);
-            undirectedGraph.AddEdgeUndirected(4, 5);
-            Console.WriteLine("DFS для неорієнтованого графа:");
-            undirectedGraph.DFS(2);
-            Console.WriteLine("BFS для неорієнтованого графа:");
-            undirectedGraph.BFS(2);
+            directedGraph.AddEdgeDirected(2, 4);
+            directedGraph.AddEdgeDirected(3, 2);
+            directedGraph.AddEdgeDirected(3, 4);
+            directedGraph.AddEdgeDirected(4, 5);
+
+            Console.WriteLine("Оберіть граф:");
+            Console.WriteLine("1. Орієнтований граф");
+            Console.WriteLine("2. Неорієнтований граф");
+            int graphChoice = int.Parse(Console.ReadLine());
+            Graph selectedGraph = (graphChoice == 1) ? directedGraph : undirectedGraph;
+            Console.Write("Введіть номер стартової вершини: ");
+            int startVertex = int.Parse(Console.ReadLine());
+            Console.WriteLine("DFS:");
+            selectedGraph.DFS(startVertex);
+            Console.WriteLine("BFS:");
+            selectedGraph.BFS(startVertex);
             Console.ReadLine();
         }
     }
